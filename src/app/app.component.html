@@ -1,6 +1,9 @@
 <mat-toolbar color="primary" class="navbar">
   <span>臺灣科技大學 資工產碩 公司面談意願表 - 學生</span>
-  <button mat-flat-button color="primary">相關資訊</button>
+  <div class="">
+    <button mat-flat-button color="primary" (click)="route_mainPage()">主頁面</button>
+    <button mat-flat-button color="primary" routerLink="/information">相關資訊</button>
+  </div>
 </mat-toolbar>
 
-<app-login></app-login>
+<router-outlet></router-outlet>
