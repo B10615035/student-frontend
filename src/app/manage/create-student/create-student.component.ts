@@ -22,11 +22,11 @@ import {
 } from 'rxjs';
 import {
   SpinDialogComponent
-} from '../spin-dialog/spin-dialog.component';
+} from '../../dialog/spin-dialog/spin-dialog.component';
 import {
   delay
 } from 'rxjs/operators';
-import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
+import { InfoDialogComponent } from '../../dialog/info-dialog/info-dialog.component';
 
 @Component({
   selector: 'app-create-student',

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ChooseCompanyComponent } from './choose-company/choose-company.component';
-import { CreateStudentComponent } from './create-student/create-student.component';
-import { InformationComponent } from './information/information.component';
-import { LoginComponent } from './login/login.component';
+import { ChooseCompanyComponent } from './student/choose-company/choose-company.component';
+import { CreateStudentComponent } from './manage/create-student/create-student.component';
+import { InformationComponent } from './student/information/information.component';
+import { LoginComponent } from './student/login/login.component';
 
 const routes: Routes = [
   {path:'', component: LoginComponent},
