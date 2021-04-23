@@ -17,7 +17,10 @@ import { ChooseCompanyComponent } from './choose-company/choose-company.componen
 import { MatRippleModule } from '@angular/material/core';
 import { CreateStudentComponent } from './create-student/create-student.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { SpinDialogComponent } from './spin-dialog/spin-dialog.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
+import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     InformationComponent,
     ChooseCompanyComponent,
-    CreateStudentComponent
+    CreateStudentComponent,
+    SpinDialogComponent,
+    InfoDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,8 +45,11 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     MatSnackBarModule,
     MatRippleModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule,
+    MatDialogModule
   ],
+  entryComponents:[SpinDialogComponent, ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -12,11 +12,21 @@ import {
   Validators
 } from '@angular/forms';
 import {
+  MatDialog
+} from '@angular/material/dialog';
+import {
   MatSnackBar
 } from '@angular/material/snack-bar';
 import {
   Observable
 } from 'rxjs';
+import {
+  SpinDialogComponent
+} from '../spin-dialog/spin-dialog.component';
+import {
+  delay
+} from 'rxjs/operators';
+import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
 
 @Component({
   selector: 'app-create-student',
@@ -25,7 +35,7 @@ import {
 })
 export class CreateStudentComponent implements OnInit {
 
-  constructor(private snackBar: MatSnackBar, private httpClient: HttpClient) {}
+  constructor(private snackBar: MatSnackBar, private httpClient: HttpClient, private dialog: MatDialog) {}
 
   ngOnInit(): void {}
   student_info = new FormGroup({
@@ -48,11 +58,13 @@ export class CreateStudentComponent implements OnInit {
     })
 
     if (student_info_check) {
+      var spinDialog = this.dialog.open(SpinDialogComponent)
       this.createStudent().subscribe(
         next => {
+          spinDialog.close()
+          this.dialog.open(InfoDialogComponent, {data: {result: next}})
           console.log(next)
           this.student_info.reset()
-          console.log(this.student_info)
         },
         error => {
           console.log(error)
@@ -70,6 +82,6 @@ export class CreateStudentComponent implements OnInit {
     }
     return this.httpClient.post < any > ("http://127.0.0.1:8001/registry", data, {
       headers: new HttpHeaders,
-    })
+    }).pipe(delay(1500))
   }
 }
