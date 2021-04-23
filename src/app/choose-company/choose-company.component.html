@@ -1,0 +1,22 @@
+<div class="main_block">
+  <table>
+    <tr>
+      <th>公司名稱</th>
+      <th>意願</th>
+    </tr>
+    <ng-container *ngFor="let company of company_info">
+      <tr>
+        <td>{{company.company_name}}</td>
+        <td>
+          <button *ngIf="company.choose" color="primary" mat-icon-button (click)="company.choose = false">
+            <mat-icon>check_box</mat-icon>
+          </button>
+          <button *ngIf="!company.choose" mat-icon-button (click)="company.choose = true">
+            <mat-icon>check_box_outline_blank</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+  <button class="submit_button" mat-stroked-button color="primary" (click)="choose_company_submit()">提交</button>
+</div>

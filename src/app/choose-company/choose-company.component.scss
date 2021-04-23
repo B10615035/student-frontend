@@ -1,0 +1,23 @@
+.main_block {
+  height: calc(100% - 80px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+th, td{
+    width: 120px;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+th{
+    height: 60px;
+    border-bottom: 2px rgb(209, 209, 209) solid;
+}
+
+.submit_button{
+    margin-top: 20px;
+}

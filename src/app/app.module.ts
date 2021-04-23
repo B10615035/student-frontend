@@ -13,13 +13,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { InformationComponent } from './information/information.component';
+import { ChooseCompanyComponent } from './choose-company/choose-company.component';
+import { MatRippleModule } from '@angular/material/core';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    InformationComponent
+    InformationComponent,
+    ChooseCompanyComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { InformationComponent } from './information/information.component';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatRippleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

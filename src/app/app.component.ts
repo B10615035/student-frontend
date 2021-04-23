@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,9 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'student-frontend';
+
+  constructor(private router:Router){ }
 
   route_mainPage(){
-    
+      this.router.navigate(['choose_company'])
   }
 }
