@@ -1,0 +1,22 @@
+<div class="create_student_block">
+    <p class="create_student_title">新增學生</p>
+  <form [formGroup]="student_info">
+    <mat-form-field class="create_student_input">
+      <mat-label>姓名</mat-label>
+      <input autocomplete="off" matInput type="text" formControlName="student_name">
+    </mat-form-field>
+    <mat-form-field class="create_student_input">
+      <mat-label>准考證</mat-label>
+      <input autocomplete="off" matInput type="text" formControlName="student_id">
+    </mat-form-field>
+    <mat-form-field class="create_student_input">
+        <mat-label>電話</mat-label>
+        <input autocomplete="off" matInput type="text" formControlName="student_phone">
+      </mat-form-field>
+      <mat-form-field class="create_student_input">
+        <mat-label>Email</mat-label>
+        <input autocomplete="off" matInput type="text" formControlName="student_email">
+      </mat-form-field>
+    <button class="submit_button" mat-stroked-button color="primary" (click)="create_student_submit()">提交</button>
+  </form>
+</div>

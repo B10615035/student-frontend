@@ -15,6 +15,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { InformationComponent } from './information/information.component';
 import { ChooseCompanyComponent } from './choose-company/choose-company.component';
 import { MatRippleModule } from '@angular/material/core';
+import { CreateStudentComponent } from './create-student/create-student.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import { MatRippleModule } from '@angular/material/core';
     AppComponent,
     LoginComponent,
     InformationComponent,
-    ChooseCompanyComponent
+    ChooseCompanyComponent,
+    CreateStudentComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { MatRippleModule } from '@angular/material/core';
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    MatRippleModule
+    MatRippleModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
