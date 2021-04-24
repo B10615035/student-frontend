@@ -22,6 +22,15 @@
     </form>
   </div>
 
+  <div class="delete_student_block">
+    <p>刪除學生</p>
+    <mat-form-field class="create_student_input">
+      <mat-label>准考證</mat-label>
+      <input autocomplete="off" matInput type="text" [(ngModel)]="deleteStudentID">
+    </mat-form-field>
+    <button class="submit_button" mat-stroked-button color="primary" (click)="delete_student_submit()">提交</button>
+  </div>
+
   <div class="student_table_block">
     <table mat-table [dataSource]="dataSource">
 
