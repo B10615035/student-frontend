@@ -21,6 +21,8 @@ import { SpinDialogComponent } from './dialog/spin-dialog/spin-dialog.component'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { InfoDialogComponent } from './dialog/info-dialog/info-dialog.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { InfoDialogComponent } from './dialog/info-dialog/info-dialog.component'
     MatRippleModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   entryComponents:[SpinDialogComponent, ],
   providers: [],

@@ -4,7 +4,8 @@ import {
 } from '@angular/common/http';
 import {
   Component,
-  OnInit
+  OnInit,
+  ViewChild
 } from '@angular/core';
 import {
   FormControl,
@@ -26,7 +27,18 @@ import {
 import {
   delay
 } from 'rxjs/operators';
-import { InfoDialogComponent } from '../../dialog/info-dialog/info-dialog.component';
+import {
+  InfoDialogComponent
+} from '../../dialog/info-dialog/info-dialog.component';
+import {
+  ManageService
+} from '../manage.service';
+import {
+  MatPaginator
+} from '@angular/material/paginator';
+import {
+  MatTableDataSource
+} from '@angular/material/table';
 
 @Component({
   selector: 'app-create-student',
@@ -35,9 +47,19 @@ import { InfoDialogComponent } from '../../dialog/info-dialog/info-dialog.compon
 })
 export class CreateStudentComponent implements OnInit {
 
-  constructor(private snackBar: MatSnackBar, private httpClient: HttpClient, private dialog: MatDialog) {}
+  constructor(private snackBar: MatSnackBar, private httpClient: HttpClient, private dialog: MatDialog, private manageService: ManageService) {}
+  @ViewChild(MatPaginator, {
+    static: true
+  }) paginator: MatPaginator;
 
-  ngOnInit(): void {}
+
+  ngOnInit(): void {
+    this.create_table()
+  }
+
+  displayedColumns: string[] = ["Name", "ID", "Phone", "Email"]
+  dataSource
+
   student_info = new FormGroup({
     student_name: new FormControl('', Validators.required),
     student_id: new FormControl('', Validators.required),
@@ -58,30 +80,35 @@ export class CreateStudentComponent implements OnInit {
     })
 
     if (student_info_check) {
-      var spinDialog = this.dialog.open(SpinDialogComponent)
-      this.createStudent().subscribe(
-        next => {
-          spinDialog.close()
-          this.dialog.open(InfoDialogComponent, {data: {result: next}})
-          console.log(next)
-          this.student_info.reset()
-        },
-        error => {
-          console.log(error)
-        }
-      )
+      this.create_student()
     }
   }
 
-  createStudent(): Observable < any > {
-    var data = {
-      name: this.student_info.value.student_name,
-      id: this.student_info.value.student_id,
-      email: this.student_info.value.student_email,
-      phone: this.student_info.value.student_phone,
-    }
-    return this.httpClient.post < any > ("http://127.0.0.1:8001/registry", data, {
-      headers: new HttpHeaders,
-    }).pipe(delay(1500))
+  async create_student() {
+    var spinDialog = this.dialog.open(SpinDialogComponent)
+    this.manageService.createStudent(this.student_info).subscribe(
+      next => {
+        this.create_table()
+        spinDialog.close()
+        this.dialog.open(InfoDialogComponent, {
+          data: {
+            result: next
+          }
+        })
+        this.student_info.reset()
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
+  create_table() {
+    this.manageService.getAllStudent().subscribe(
+      next => {
+        this.dataSource = new MatTableDataSource(next)
+        this.dataSource.paginator = this.paginator;
+      }
+    )
   }
 }
