@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth.guard';
 import { ChooseCompanyComponent } from './choose-company/choose-company.component';
 import { InformationComponent } from './information/information.component';
 import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   {path:'', component: LoginComponent},
-  {path:'information', component: InformationComponent},
-  {path:'choose_company', component: ChooseCompanyComponent}
+  {path:'information', component: InformationComponent, canActivate:[AuthGuard]},
+  {path:'chooseCompany', component: ChooseCompanyComponent, canActivate:[AuthGuard]}
 ];
 
 @NgModule({
