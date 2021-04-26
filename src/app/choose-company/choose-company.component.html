@@ -1,5 +1,11 @@
 <div class="main_block">
-  <table>
+
+  <div class="willing_table" *ngIf="showWilling">
+    <p class="willing_title">意願 :</p>
+    <p class="willing_content">{{willingList}}</p>
+  </div>
+
+  <table *ngIf="showChoose">
     <tr>
       <th>公司名稱</th>
       <th>意願</th>
@@ -18,5 +24,6 @@
       </tr>
     </ng-container>
   </table>
-  <button class="submit_button" mat-stroked-button color="primary" (click)="choose_company_submit()">提交</button>
+  <button *ngIf="showChoose" class="submit_button" mat-stroked-button color="primary" (click)="choose_company_submit()">提交</button>
+  <button *ngIf="showWilling && !showChoose" class="submit_button" mat-stroked-button color="primary" (click)="update_company_submit()">修改</button>
 </div>

@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
       var spinDialog = this.dialog.open(SpinDialogComponent)
       this.appService.loginRequest(this.login_info).subscribe(
         next => {
+          this.appService.studentID = this.login_info.value.student_id
           this.appService.token = next.info
           this.router.navigate(['chooseCompany'])
           spinDialog.close()

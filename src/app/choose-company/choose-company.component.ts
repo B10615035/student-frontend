@@ -2,6 +2,12 @@ import {
   Component,
   OnInit
 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import {
+  AppService
+} from '../app.service';
+import { InfoDialogComponent } from '../dialog/info-dialog/info-dialog.component';
+import { SpinDialogComponent } from '../dialog/spin-dialog/spin-dialog.component';
 
 @Component({
   selector: 'app-choose-company',
@@ -10,11 +16,16 @@ import {
 })
 export class ChooseCompanyComponent implements OnInit {
 
-  constructor() {}
+  constructor(private appService: AppService, private dialog:MatDialog) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    var spinDialog = this.dialog.open(SpinDialogComponent)
+    this.getStudent(spinDialog, '')
+  }
 
-  centered = true;
+  showWilling: boolean
+  showChoose: boolean
+  willingList: string[] = []
 
   company_info = [{
     company_name: '中華電信',
@@ -42,12 +53,51 @@ export class ChooseCompanyComponent implements OnInit {
     choose: false
   }, ]
 
-  choose_company_submit(){
-    var company_result = []
+  getStudent(spinDialog, info){
+    this.appService.getStudent().subscribe(
+      next => {
+        spinDialog.close()
+        if(info)
+          this.dialog.open(InfoDialogComponent, {
+            data: {
+              result: info
+            }
+          })
+        this.willingList = next.info.company
+        if (this.willingList.length == 0) {
+          this.showChoose = true
+          this.showWilling = false
+        } else {
+          this.showChoose = false
+          this.showWilling = true
+        }
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
+  choose_company_submit() {
+    var spinDialog = this.dialog.open(SpinDialogComponent)
+    var company_result = {
+      company: []
+    }
     this.company_info.forEach(item => {
-      if(item.choose === true)
-        company_result.push(item.company_name)
+      if (item.choose === true)
+        company_result.company.push(item.company_name)
     })
-    console.log(company_result)
+    this.appService.updateStudent(company_result).subscribe(
+      next => {
+        this.getStudent(spinDialog , next)
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
+  update_company_submit() {
+    this.showChoose = true
   }
 }
