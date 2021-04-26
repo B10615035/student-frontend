@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       this.appService.loginRequest(this.login_info).subscribe(
         next => {
           this.appService.studentID = this.login_info.value.student_id
-          this.appService.token = next.info
+          this.appService.setCookie(next.info)
           this.router.navigate(['chooseCompany'])
           spinDialog.close()
         },

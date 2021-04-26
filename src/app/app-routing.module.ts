@@ -5,9 +5,10 @@ import { ChooseCompanyComponent } from './choose-company/choose-company.componen
 import { InformationComponent } from './information/information.component';
 import { LoginComponent } from './login/login.component';
 const routes: Routes = [
-  {path:'', component: LoginComponent},
+  {path:'login', component: LoginComponent},
   {path:'information', component: InformationComponent, canActivate:[AuthGuard]},
-  {path:'chooseCompany', component: ChooseCompanyComponent, canActivate:[AuthGuard]}
+  {path:'chooseCompany', component: ChooseCompanyComponent, canActivate:[AuthGuard]},
+  {path:'', component: ChooseCompanyComponent, canActivate:[AuthGuard]}
 ];
 
 @NgModule({
