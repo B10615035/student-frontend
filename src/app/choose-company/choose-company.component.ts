@@ -3,6 +3,7 @@ import {
   OnInit
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import {
   AppService
 } from '../app.service';
@@ -16,7 +17,7 @@ import { SpinDialogComponent } from '../dialog/spin-dialog/spin-dialog.component
 })
 export class ChooseCompanyComponent implements OnInit {
 
-  constructor(private appService: AppService, private dialog:MatDialog) {}
+  constructor(private appService: AppService, private dialog:MatDialog, private router:Router) {}
 
   ngOnInit(): void {
     var spinDialog = this.dialog.open(SpinDialogComponent)
@@ -106,6 +107,7 @@ export class ChooseCompanyComponent implements OnInit {
   }
 
   logout_submit(){
-    
+    this.appService.deleteCookie()
+    this.router.navigate(["login"])
   }
 }
