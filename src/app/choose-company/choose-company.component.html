@@ -1,29 +1,53 @@
 <div class="main_block">
 
-  <div class="willing_table" *ngIf="showWilling">
-    <p class="willing_title">意願 :</p>
-    <p class="willing_content">{{willingList}}</p>
+  <div class="student_block">
+    <p class="title">學生資訊</p>
+    <p>{{studentName}}</p>
+    <p>{{studentID}}</p>
+    <button mat-stroked-button color="warn" class="logout_button" (click)="logout_submit()">登出</button>
   </div>
 
-  <table *ngIf="showChoose">
-    <tr>
-      <th>公司名稱</th>
-      <th>意願</th>
-    </tr>
-    <ng-container *ngFor="let company of company_info">
+  <div class="information_block">
+    <ol>
+      <p>說明 :</p>
+      <li>學生登入後即可選擇想要面試的公司</li>
+      <li>勾選公司代表有意願參預該公司面試</li>
+      <li>未勾選公司代表無意願參預該公司面試</li>
+      <li>送出表單後在 5/4 之前選擇"修改"可變更選擇的公司</li>
+      <li>面談順序會於 5/15 當天公佈</li>
+    </ol>
+  </div>
+
+  <div class="choose_block">
+    <div class="willing_table" *ngIf="showWilling">
+      <p class="title">我選擇的公司 :</p>
+      <p class="willing_content">{{willingList}}</p>
+    </div>
+
+    <table *ngIf="showChoose">
+      <p class="title">選擇公司 :</p>
       <tr>
-        <td>{{company.company_name}}</td>
-        <td>
-          <button *ngIf="company.choose" color="primary" mat-icon-button (click)="company.choose = false">
-            <mat-icon>check_box</mat-icon>
-          </button>
-          <button *ngIf="!company.choose" mat-icon-button (click)="company.choose = true">
-            <mat-icon>check_box_outline_blank</mat-icon>
-          </button>
-        </td>
+        <th>公司名稱</th>
+        <th>意願</th>
       </tr>
-    </ng-container>
-  </table>
-  <button *ngIf="showChoose" class="submit_button" mat-stroked-button color="primary" (click)="choose_company_submit()">提交</button>
-  <button *ngIf="showWilling && !showChoose" class="submit_button" mat-stroked-button color="primary" (click)="update_company_submit()">修改</button>
+      <ng-container *ngFor="let company of company_info">
+        <tr>
+          <td>{{company.company_name}}</td>
+          <td>
+            <button *ngIf="company.choose" color="primary" mat-icon-button (click)="company.choose = false">
+              <mat-icon>check_box</mat-icon>
+            </button>
+            <button *ngIf="!company.choose" mat-icon-button (click)="company.choose = true">
+              <mat-icon>check_box_outline_blank</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+    </table>
+    <button *ngIf="showChoose" class="submit_button" mat-stroked-button color="primary"
+      (click)="choose_company_submit()">提交</button>
+    <button *ngIf="showWilling && !showChoose" class="update_button" mat-stroked-button color="primary"
+      (click)="update_company_submit()">修改</button>
+  </div>
+
 </div>

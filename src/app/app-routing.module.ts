@@ -6,7 +6,6 @@ import { InformationComponent } from './information/information.component';
 import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   {path:'login', component: LoginComponent},
-  {path:'information', component: InformationComponent, canActivate:[AuthGuard]},
   {path:'chooseCompany', component: ChooseCompanyComponent, canActivate:[AuthGuard]},
   {path:'', component: ChooseCompanyComponent, canActivate:[AuthGuard]}
 ];

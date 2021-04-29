@@ -14,7 +14,6 @@ import {
 import {
   delay,
   map,
-  tap
 } from 'rxjs/operators';
 
 @Injectable({
@@ -24,36 +23,38 @@ export class AppService {
 
   constructor(private httpClient: HttpClient, private cookieService: CookieService) {}
 
-  studentID: string = ""
+  url = "http://3.113.9.185:8001"
 
   loginRequest(login_info): Observable < any > {
     var data = {
       name: login_info.value.student_name,
       id: login_info.value.student_id
     }
-    return this.httpClient.post < any > (`http://127.0.0.1:8001/student/login`, data, {
+    return this.httpClient.post < any > (`${this.url}/student/login`, data, {
       headers: new HttpHeaders,
     }).pipe(delay(1500))
   }
 
   updateStudent(data): Observable < any > {
-    return this.httpClient.put < any > (`http://127.0.0.1:8001/student/${this.cookieService.get('user')}`, data, {
-      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.getCookie()),
+    return this.httpClient.put < any > (`${this.url}/student/${this.cookieService.get('studentID')}`, data, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.getToken()),
     }).pipe(delay(1500))
   }
 
-  getStudent(): Observable < any > {
-    return this.httpClient.get < any > (`http://127.0.0.1:8001/student/${this.cookieService.get('user')}`, {
-      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.getCookie()),
+  getStudent(): Observable < any > { 
+    return this.httpClient.get < any > (`${this.url}/student/${this.cookieService.get('studentID')}`, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.getToken()),
     }).pipe(delay(1500))
   }
 
-  setCookie(token) {
+  setCookie(token, studentInfo) {
     this.cookieService.set("token", token)
-    this.cookieService.set("user", this.studentID)
+    this.cookieService.set("studentID", studentInfo.student_id)
+    this.cookieService.set("studentName", studentInfo.student_name)
   }
 
   checkTokenInService(): Observable < any > {
+    console.log(this.cookieService.getAll())
     return this.checkToken().pipe(
       map(data => {
         return data.info
@@ -62,21 +63,29 @@ export class AppService {
   }
 
   checkToken(): Observable < any > {
-    var data = this.getCookie()
+    var data = this.getToken()
     if (!data)
       data = "login"
-    return this.httpClient.post < any > (`http://127.0.0.1:8001/auth`, {
+    return this.httpClient.post < any > (`${this.url}/auth`, {
       token: data
     }, {
       headers: new HttpHeaders(),
     })
   }
 
-  getCookie() {
+  getToken() {
     return this.cookieService.get('token')
+  }
+
+  getStudentInfo(){
+    return [this.cookieService.get("studentName"), this.cookieService.get("studentID")]
   }
 
   checkCookie() {
     return this.cookieService.check('token')
+  }
+
+  deleteCookie(){
+    this.cookieService.deleteAll()
   }
 }

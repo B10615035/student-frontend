@@ -21,17 +21,21 @@ export class ChooseCompanyComponent implements OnInit {
   ngOnInit(): void {
     var spinDialog = this.dialog.open(SpinDialogComponent)
     this.getStudent(spinDialog, '')
+    this.studentName = this.appService.getStudentInfo()[0]
+    this.studentID = this.appService.getStudentInfo()[1]
   }
 
   showWilling: boolean
   showChoose: boolean
   willingList: string[] = []
+  studentName:string = ""
+  studentID:string = ""
 
   company_info = [{
     company_name: '中華電信',
     choose: false
   }, {
-    company_name: '台達電子工業',
+    company_name: '台達電子',
     choose: false
   }, {
     company_name: '邑富',
@@ -99,5 +103,9 @@ export class ChooseCompanyComponent implements OnInit {
 
   update_company_submit() {
     this.showChoose = true
+  }
+
+  logout_submit(){
+    
   }
 }

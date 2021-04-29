@@ -32,7 +32,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private snackBar: MatSnackBar, private router: Router, private appService: AppService, private dialog: MatDialog) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.appService.deleteCookie()
+  }
 
   login_info = new FormGroup({
     student_name: new FormControl('', Validators.required),
@@ -49,8 +51,7 @@ export class LoginComponent implements OnInit {
       var spinDialog = this.dialog.open(SpinDialogComponent)
       this.appService.loginRequest(this.login_info).subscribe(
         next => {
-          this.appService.studentID = this.login_info.value.student_id
-          this.appService.setCookie(next.info)
+          this.appService.setCookie(next.info, this.login_info.value)
           this.router.navigate(['chooseCompany'])
           spinDialog.close()
         },
