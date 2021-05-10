@@ -24,6 +24,7 @@ export class AppService {
   constructor(private httpClient: HttpClient, private cookieService: CookieService) {}
 
   url = "http://3.113.9.185:8001"
+  // url = "http://127.0.0.1:8001"
 
   loginRequest(login_info): Observable < any > {
     var data = {
@@ -33,6 +34,12 @@ export class AppService {
     return this.httpClient.post < any > (`${this.url}/student/login`, data, {
       headers: new HttpHeaders,
     }).pipe(delay(1500))
+  }
+
+  getSchedule(): Observable < any > {
+    return this.httpClient.get < any > (`${this.url}/company/schedule`, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.getToken()),
+    })
   }
 
   updateStudent(data): Observable < any > {

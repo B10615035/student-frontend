@@ -20,7 +20,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { InfoDialogComponent } from './dialog/info-dialog/info-dialog.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { LoginComponent } from './login/login.component'
+import { LoginComponent } from './login/login.component';
+import { ScheduleComponent } from './schedule/schedule.component'
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LoginComponent } from './login/login.component'
     ChooseCompanyComponent,
     SpinDialogComponent,
     InfoDialogComponent,
-    LoginComponent
+    LoginComponent,
+    ScheduleComponent
   ],
   imports: [
     BrowserModule,
