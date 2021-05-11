@@ -1,3 +1,10 @@
+<div class="student_block">
+  <p class="title">學生資訊</p>
+  <p>{{studentName}}</p>
+  <p>{{studentID}}</p>
+  <button mat-stroked-button color="warn" class="logout_button" (click)="logout_submit()">登出</button>
+</div>
+
 <div class="schedule_block">
   <table mat-table [dataSource]="dataSource">
 
@@ -21,7 +28,30 @@
   </table>
 </div>
 
-<div class="schedule_block willing_block">
+<div *ngIf="showWilling" class="schedule_block willing_block result_block">
+  <table>
+    <tr>
+      <th>面談公司</th>
+      <th>意願</th>
+    </tr>
+    <ng-container *ngFor="let company of final_willing_list; let i = index">
+      <tr>
+        <td>{{company.name}}</td>
+        <td>{{final_willing_list[i].willing}}</td>
+      </tr>
+    </ng-container>
+  </table>
+  <button class="update_button" *ngIf="showWilling && !showChoose" mat-stroked-button color="primary"
+    (click)="update_willing()">修改</button>
+</div>
+
+<div *ngIf="showChoose" class="schedule_block willing_block">
+  <p>說明</p>
+  <ol>
+    <li>請將志願欄填入序位，最想進入的企業請填序位「1」，依此類推</li>
+    <li>學生之志願，可不足額填寫(無意願請留空)</li>
+    <li>學生之志願與企業之培育意願相加，序位加總數字越低，則雙方媒合程度越高</li>
+  </ol>
   <table>
     <tr>
       <th>時間</th>
@@ -42,5 +72,5 @@
       </tr>
     </ng-container>
   </table>
-  <button class="update_button" mat-stroked-button color="primary">提交</button>
+  <button class="update_button" mat-stroked-button color="primary" (click)="submit_willing()">提交</button>
 </div>

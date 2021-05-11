@@ -23,8 +23,8 @@ export class AppService {
 
   constructor(private httpClient: HttpClient, private cookieService: CookieService) {}
 
-  url = "http://3.113.9.185:8001"
-  // url = "http://127.0.0.1:8001"
+  // url = "http://3.113.9.185:8001"
+  url = "http://127.0.0.1:8001"
 
   loginRequest(login_info): Observable < any > {
     var data = {
@@ -40,6 +40,12 @@ export class AppService {
     return this.httpClient.get < any > (`${this.url}/company/schedule`, {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.getToken()),
     })
+  }
+
+  updateWilling(data): Observable < any > {
+    return this.httpClient.put < any > (`${this.url}/student/willing/${this.cookieService.get('studentID')}`, data, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.getToken()),
+    }).pipe(delay(1500))
   }
 
   updateStudent(data): Observable < any > {
@@ -61,7 +67,6 @@ export class AppService {
   }
 
   checkTokenInService(): Observable < any > {
-    console.log(this.cookieService.getAll())
     return this.checkToken().pipe(
       map(data => {
         return data.info

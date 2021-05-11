@@ -34,6 +34,21 @@
   align-items: center;
   color: #858585;
 
+  p {
+    color: $deep-blue;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  ol {
+    margin-bottom: 50px;
+    margin-top: 0;
+
+    li {
+      font-size: 1.2rem;
+    }
+  }
+
   th,
   td {
     width: 120px;
@@ -54,4 +69,27 @@
   .mat-form-field {
     width: 50px !important;
   }
+}
+
+.result_block {
+  td {
+    padding: 20px 20px 5px !important;
+  }
+
+  .update_button {
+    margin-top: 20px;
+  }
+}
+
+.student_block {
+  width: 100%;
+  margin-bottom: 50px;
+
+  .title {
+    margin-right: 0;
+    font-size: 2rem;
+    color: $deep-blue;
+  }
+
+  text-align: center;
 }
